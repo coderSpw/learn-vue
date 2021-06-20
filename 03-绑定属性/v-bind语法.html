@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+   <!-- <img v-bind:src="url" alt=""/>-->
+    <img :src="url" alt=""/>
+    <a :href="bdUrl">百度</a>
+  </div>
+</body>
+
+<script src="../js/Vue.js"></script>
+<script>
+  /*
+    v-bind:src ===   :src(语法糖)
+   */
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello Vue',
+      url: 'https://vuejs.org/images/logo.svg',
+      bdUrl: 'http://www.baidu.com'
+    }
+  })
+</script>
+</html>

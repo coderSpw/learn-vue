@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li :class="getClass(index)" :style="getStyles()"
+          v-for="(item,index) in names" @click="btnClick(index)">{{item}}</li>
+    </ul>
+  </div>
+</body>
+
+<script src="../js/Vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      names: ['张三','李四','王五','马六'],
+      isActive: false,
+      index: 0
+    },
+    methods: {
+      getClass: function (index) {
+        this.isActive = index === this.index;
+        return {active: this.isActive};
+      },
+      btnClick: function (index) {
+        this.index = index;
+      },
+      getStyles: function () {
+        return {fontSize: '40px'}
+      }
+    }
+  })
+</script>
+</html>

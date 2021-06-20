@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+      <h2 >{{message}}</h2>
+  </div>
+</body>
+
+<script src="../js/Vue.js"></script>
+<script>
+  // v-cloak 斗篷 解析前存在, 解析后消失
+  setTimeout(() => {
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello Vue'
+      }
+    })
+  },1000)
+</script>
+</html>

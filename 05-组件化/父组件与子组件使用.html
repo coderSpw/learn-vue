@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>父组件与子组件使用</title>
+</head>
+
+<body>
+  <div id="app">
+      <h2>{{message}}</h2>
+      <cpn1></cpn1>
+  </div>
+</body>
+
+<script src="../js/Vue.js"></script>
+<script>
+  /*
+    父子组件    子组件先定义进行初始化加载  编写顺序 先写子组件再写父组件
+   */
+  const cpnC1 = Vue.extend({
+    template: `
+      <div>
+        <h2>我cpn1是父组件</h2>
+        <cpn2></cpn2>
+      </div>
+    `,
+    components: {
+      cpn2: {
+        template: `
+          <div>
+            <h2>我cpn2是子组件</h2>
+          </div>
+        `
+      }
+    }
+  });
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello Vue'
+    },
+    components: {
+      cpn1: cpnC1
+    }
+  })
+</script>
+</html>

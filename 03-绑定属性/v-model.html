@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <div id="app">
+    <label>
+      <input type="text" v-model.lazy.trim="message">
+      <input type="text" :value="message" @input="changeVal" />
+    </label>
+    <h2>{{message}}</h2>
+
+    <label for="male">
+      <input type="radio" id="male" value="男" v-model="sex"> 男
+    </label>
+    <label for="female">
+      <input type="radio" id="female" value="女" v-model="sex">女
+    </label>
+    <h2>{{sex}}</h2>
+
+    <label for="agree">
+      <input type="checkbox" id="agree" v-model="isAgree">同意协议
+    </label>
+    <h2>{{isAgree}}</h2>
+    <button :disabled="!isAgree" @click="next">下一步</button>
+
+    <div>
+      <!--<input type="checkbox" value="三国演义" v-model="bookNames" /> 三国演义
+      <input type="checkbox" value="水浒传" v-model="bookNames" /> 水浒传
+      <input type="checkbox" value="红楼梦" v-model="bookNames" /> 红楼梦
+      <input type="checkbox" value="西游记" v-model="bookNames" /> 西游记-->
+      <label v-for="item in books" :for="item.name">
+        <input type="checkbox" :id="item.name" :value="item.name" v-model="bookNames"/> {{item.name}}
+      </label>
+      <h2>{{bookNames}}</h2>
+    </div>
+
+    <div>
+      <label for="selectBooks">
+        <select name="selectBooks" id="selectBooks" v-model="bookName">
+          <option v-for="item in books" :value="item.name">{{item.name}}</option>
+        </select>
+      </label>
+      {{bookName}}
+    </div>
+
+    <div>
+      <lable for="age">
+        <input id = "age" type="number" v-model.number="age">
+        {{typeof age}}
+      </lable>
+    </div>
+  </div>
+</body>
+
+<script src="../js/Vue.js"></script>
+<script>
+  /*
+       v-model: 双向绑定  用于操作表单
+        相当于input的  :value + @input = $event.target.value
+        input:radio 根据name属性来控制互斥  name作为key
+        修饰符： lazy  number  trim
+   */
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello Vue',
+      sex: '男',
+      isAgree: false,
+      books: [
+        {name: '三国演义', date: '2006-9', price: 85.00, count: 1},
+        {name: '水浒传', date: '2006-2', price: 59.00, count: 1},
+        {name: '红楼梦', date: '2008-10', price: 39.00, count: 1},
+        {name: '西游记', date: '2006-3', price: 128.00, count: 1}
+      ],
+      bookNames: [],
+      bookName: '三国演义',
+      age: ''
+    },
+    methods: {
+      changeVal(event) {
+        this.message = event.target.value;
+      },
+      next() {
+        alert('下一步');
+      }
+    }
+  })
+</script>
+</html>
