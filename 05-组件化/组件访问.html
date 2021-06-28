@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件访问</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{message}}</h2>
+  <button @click="btnClick">父组件按钮</button>
+  <cpn ref="xxx"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>我是子组件</h2>
+    <button @click="childClick">子组件按钮</button>
+  </div>
+</template>
+
+<script src="../js/Vue.js"></script>
+<script>
+  /*
+     父组件访问子组件：
+      $children: [VueComponent,...] 返回数组类型   不推荐使用   this.$children[index].属性或方法
+      $refs：{VueComponent} 返回对象类型 默认空对象  需要在引用模板标签加上ref属性  this.$refs.xx(ref属性设置名).属性或方法
+
+      子组件访问父组件:  不推荐使用  影响组件的复用性
+      $parent: {Vue or VueComponent}   this.$parent.属性或方法
+      $root: {Vue}   this.$root.属性或方法
+   */
+  const cpn = {
+    template: '#cpn',
+    data() {
+      return {
+        name: "嗯哼"
+      }
+    },
+    methods: {
+      getMessage() {
+        console.log("子组件信息");
+      },
+      childClick() {
+        console.log(this.$parent);
+        console.log(this.$parent.message);
+        console.log(this.$root.message);
+      }
+    }
+  };
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello Vue'
+    },
+    methods: {
+      btnClick() {
+        /*console.log(this.$children);
+        console.log(this.$children[0].name);
+        console.log(this.$children[0].getMessage());*/
+        console.log(this.$refs.xxx.name);
+        console.log(this.$refs.xxx.getMessage());
+      }
+    },
+    components: {
+      cpn
+    }
+  });
+</script>
+</body>
+</html>
