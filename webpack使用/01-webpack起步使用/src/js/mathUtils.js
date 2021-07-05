@@ -1,3 +1,4 @@
+const number1 = 10;
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -11,4 +12,4 @@ function mul(num1, num2) {
   mul
 };*/
 
-export {add, mul}
+export {add, mul, number1}
